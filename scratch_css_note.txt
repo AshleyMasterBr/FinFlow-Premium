@@ -1,0 +1,2 @@
+/* (Existing styles from Perfil.css + new profile header styles) */
+/* Eu vou fazer um append via replace_file_content ou apenas re-escrever o arquivo com os estilos, pera, nao posso overwrite tudo, uso multi_replace_file_content ou view_file primeiro. */

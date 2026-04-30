@@ -47,13 +47,11 @@ export default function AddTransaction() {
 
     setSaving(true);
     const tx = {
-      id: generateId(),
       type,
       amount: parseInt(amount) / 100,
       description: description.trim(),
       category,
       date,
-      createdAt: new Date().toISOString(),
     };
 
     addTransaction(tx);

@@ -199,12 +199,10 @@ function SugestaoMeta({ renda, salario, onAdd }) {
         className="btn btn-secondary btn-sm"
         style={{ marginTop: 12 }}
         onClick={() => onAdd({
-          id: generateId(),
           label: 'Reserva de emergência',
           icon: '🛡️',
           target: suggested * 6,
           current: 0,
-          createdAt: new Date().toISOString(),
         })}
         id="sugestao-accept-btn"
       >
@@ -222,12 +220,10 @@ function AddGoalSheet({ onClose, onAdd }) {
   const handleSave = () => {
     if (!label.trim() || !target) return;
     onAdd({
-      id: generateId(),
       label: label.trim(),
       icon,
       target: parseInt(target.replace(/\D/g, '')) / 100,
       current: 0,
-      createdAt: new Date().toISOString(),
     });
   };
 

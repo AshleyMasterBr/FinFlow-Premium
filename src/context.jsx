@@ -27,7 +27,7 @@ const DEFAULT_STATE = {
   goals: [],
   categories: DEFAULT_CATEGORIES,
   // Limites freemium
-  TX_LIMIT_FREE: 30,
+  TRANSACTION_LIMIT_FREE: 30,
   GOAL_LIMIT_FREE: 1,
 }
 
@@ -219,6 +219,23 @@ export function AppProvider({ children }) {
     patch(fields)
   }
 
+  // ── Auth metadata (Nome, Foto) ────────────────────────────────────────────
+  const updateUserMetadata = async (metadata) => {
+    const { session } = state;
+    if (!session) return;
+    
+    const { data, error } = await supabase.auth.updateUser({
+      data: metadata
+    });
+    
+    if (error) {
+      console.error('Erro ao atualizar perfil:', error);
+      return;
+    }
+    
+    patch({ session: data.session });
+  }
+
   // ── Auth helpers ──────────────────────────────────────────────────────────
   const signOut = async () => {
     await supabase.auth.signOut()
@@ -257,6 +274,7 @@ export function AppProvider({ children }) {
     updateGoal,
     removeGoal,
     update,
+    updateUserMetadata,
     signOut,
     resetData,
     // Reload manual

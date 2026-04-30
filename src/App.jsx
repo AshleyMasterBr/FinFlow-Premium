@@ -10,6 +10,7 @@ import Metas       from './pages/Metas';
 import Relatorios  from './pages/Relatorios';
 import Paywall     from './pages/Paywall';
 import Perfil      from './pages/Perfil';
+import InstallPrompt from './components/InstallPrompt';
 
 function AppRoutes() {
   const { data } = useApp();
@@ -69,6 +70,7 @@ export default function App() {
     <AppProvider>
       <BrowserRouter>
         <AppRoutes />
+        <InstallPrompt />
       </BrowserRouter>
     </AppProvider>
   );

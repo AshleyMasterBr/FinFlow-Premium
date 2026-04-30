@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context';
 import { formatCurrency, getMonthlyHistory } from '../store';
@@ -33,8 +33,18 @@ const DIFIC_LABELS = {
 };
 
 export default function Perfil() {
-  const { data, update, signOut, resetData } = useApp();
+  const { data, update, updateUserMetadata, signOut, resetData } = useApp();
   const navigate = useNavigate();
+
+  const userMeta = data.session?.user?.user_metadata || {};
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [editName, setEditName] = useState(userMeta.full_name || '');
+  const [editAvatar, setEditAvatar] = useState(userMeta.avatar_url || '');
+
+  const handleSaveProfile = async () => {
+    await updateUserMetadata({ full_name: editName, avatar_url: editAvatar });
+    setIsEditingProfile(false);
+  };
 
   const history = getMonthlyHistory(data.transactions, 6);
   const totalIncome = history.reduce((s, m) => s + m.income, 0);
@@ -60,6 +70,24 @@ export default function Perfil() {
       </div>
 
       <div className="page-content">
+        {/* User Identity */}
+        <div className="perfil-header-card">
+          <div className="perfil-avatar">
+            {userMeta.avatar_url ? (
+              <img src={userMeta.avatar_url} alt="Avatar" className="avatar-img" />
+            ) : (
+              <span className="avatar-placeholder">{editName ? editName.charAt(0).toUpperCase() : 'U'}</span>
+            )}
+          </div>
+          <div className="perfil-user-info">
+            <h2 className="perfil-name">{userMeta.full_name || 'Usuário FinFlow'}</h2>
+            <p className="perfil-email">{data.session?.user?.email}</p>
+          </div>
+          <button className="btn btn-icon btn-edit-profile" onClick={() => setIsEditingProfile(true)}>
+            ✏️
+          </button>
+        </div>
+
         {/* Premium Banner */}
         {!data.premium ? (
           <div className="premium-banner" onClick={() => navigate('/paywall')} id="perfil-premium-banner">
@@ -154,6 +182,42 @@ export default function Perfil() {
           </button>
         </div>
       </div>
+
+      {/* Edit Profile Modal */}
+      {isEditingProfile && (
+        <div className="modal-overlay" onClick={() => setIsEditingProfile(false)}>
+          <div className="bottom-sheet" onClick={e => e.stopPropagation()}>
+            <div className="sheet-handle" />
+            <h2 className="sheet-title">Editar Perfil</h2>
+            
+            <div className="add-goal-form" style={{ marginTop: 20 }}>
+              <div className="input-group">
+                <label className="input-label">Seu Nome</label>
+                <input
+                  className="input-field"
+                  placeholder="Ex: João Silva"
+                  value={editName}
+                  onChange={e => setEditName(e.target.value)}
+                />
+              </div>
+              
+              <div className="input-group">
+                <label className="input-label">URL da Foto (opcional)</label>
+                <input
+                  className="input-field"
+                  placeholder="https://..."
+                  value={editAvatar}
+                  onChange={e => setEditAvatar(e.target.value)}
+                />
+              </div>
+
+              <button className="btn btn-primary btn-full" onClick={handleSaveProfile} style={{ marginTop: 10 }}>
+                Salvar alterações
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <BottomNav active="perfil" onAdd={() => navigate('/add-transaction')} />
     </div>
