@@ -11,7 +11,7 @@ const SUGESTAO_META_MAP = {
 };
 
 export default function Metas() {
-  const { data, addGoal, updateGoal, removeGoal } = useApp();
+  const { data, addGoal, updateGoal, removeGoal, addTransaction } = useApp();
   const navigate = useNavigate();
   const [showAdd, setShowAdd] = useState(false);
   const [showDeposit, setShowDeposit] = useState(null); // goal id
@@ -30,6 +30,14 @@ export default function Metas() {
     const goal = data.goals.find(g => g.id === showDeposit);
     if (!goal) return;
     updateGoal(showDeposit, { current: Math.min(goal.target, goal.current + amount) });
+    
+    addTransaction({
+      type: 'expense',
+      amount: amount,
+      description: `Reserva: ${goal.label}`,
+      category: 'outros',
+      date: new Date().toISOString().slice(0, 10),
+    });
     setShowDeposit(null);
     setDepositAmount('');
   };
