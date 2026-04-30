@@ -3,6 +3,16 @@
 
 const STORAGE_KEY = 'finflow_data';
 
+export const DEFAULT_CATEGORIES = [
+  { id: 'moradia', label: 'Moradia', icon: '🏠', color: 'moradia', type: 'expense' },
+  { id: 'alimentacao', label: 'Alimentação', icon: '🍽️', color: 'alimentacao', type: 'expense' },
+  { id: 'transporte', label: 'Transporte', icon: '🚗', color: 'transporte', type: 'expense' },
+  { id: 'saude', label: 'Saúde', icon: '💊', color: 'saude', type: 'expense' },
+  { id: 'lazer', label: 'Lazer', icon: '🎮', color: 'lazer', type: 'expense' },
+  { id: 'outros', label: 'Outros', icon: '📦', color: 'outros', type: 'expense' },
+  { id: 'receita', label: 'Receita', icon: '💰', color: 'receita', type: 'income' },
+];
+
 const DEFAULT_DATA = {
   onboardingComplete: false,
   profile: null, // 'clt' | 'autonomo' | 'estudante' | 'comerciante'
@@ -14,15 +24,7 @@ const DEFAULT_DATA = {
   // Financial data
   transactions: [],
   goals: [],
-  categories: [
-    { id: 'moradia', label: 'Moradia', icon: '🏠', color: 'moradia', type: 'expense' },
-    { id: 'alimentacao', label: 'Alimentação', icon: '🍽️', color: 'alimentacao', type: 'expense' },
-    { id: 'transporte', label: 'Transporte', icon: '🚗', color: 'transporte', type: 'expense' },
-    { id: 'saude', label: 'Saúde', icon: '💊', color: 'saude', type: 'expense' },
-    { id: 'lazer', label: 'Lazer', icon: '🎮', color: 'lazer', type: 'expense' },
-    { id: 'outros', label: 'Outros', icon: '📦', color: 'outros', type: 'expense' },
-    { id: 'receita', label: 'Receita', icon: '💰', color: 'receita', type: 'income' },
-  ],
+  categories: DEFAULT_CATEGORIES,
   salario: 0,
   premium: false,
   // Limits
