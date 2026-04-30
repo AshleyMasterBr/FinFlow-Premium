@@ -12,7 +12,8 @@ import Paywall     from './pages/Paywall';
 import Perfil      from './pages/Perfil';
 
 function AppRoutes() {
-  const { session, loading, onboardingComplete } = useApp();
+  const { data } = useApp();
+  const { session, loading, onboardingComplete } = data;
 
   // ── Loading splash ──────────────────────────────────────────────────────────
   if (loading) {

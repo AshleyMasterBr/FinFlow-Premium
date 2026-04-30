@@ -248,8 +248,7 @@ export function AppProvider({ children }) {
   }
 
   const value = {
-    // State
-    ...state,
+    data: state,
     // Actions
     completeOnboarding,
     addTransaction,
