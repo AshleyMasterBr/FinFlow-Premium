@@ -1,0 +1,129 @@
+/* Auth CSS — consistente com o design system */
+.auth-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  gap: 24px;
+}
+
+/* Logo */
+.auth-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-logo-icon {
+  font-size: 44px;
+}
+
+.auth-logo-text {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: -1.5px;
+}
+
+.auth-logo-tag {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Card */
+.auth-card {
+  width: 100%;
+  max-width: 390px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 9px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.auth-tab.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-error {
+  font-size: var(--font-size-sm);
+  color: var(--brand-danger);
+  padding: 10px 12px;
+  background: var(--brand-danger-dim);
+  border-radius: var(--radius-md);
+  font-weight: 400;
+}
+
+.auth-success {
+  font-size: var(--font-size-sm);
+  color: var(--brand-primary);
+  padding: 10px 12px;
+  background: var(--brand-primary-dim);
+  border-radius: var(--radius-md);
+  font-weight: 400;
+}
+
+/* Forgot */
+.auth-forgot {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  text-align: center;
+  transition: color var(--transition-fast);
+  padding: 0;
+  margin-top: -8px;
+}
+.auth-forgot:hover { color: var(--text-secondary); }
+
+/* Disclaimer */
+.auth-disclaimer {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 400;
+  max-width: 260px;
+  line-height: 1.5;
+}

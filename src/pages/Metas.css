@@ -1,0 +1,181 @@
+/* Metas CSS v2 */
+.goal-card-full {
+  margin: 0 20px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  transition: border-color var(--transition-fast);
+  animation: fadeInUp 0.3s ease forwards;
+}
+.goal-card-full.goal-done {
+  border-color: var(--brand-primary-border);
+  background: rgba(78,207,160,0.04);
+}
+
+.goal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.goal-icon-wrap {
+  width: 42px; height: 42px;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.goal-icon-big { font-size: 22px; }
+
+.goal-card-info { flex: 1; }
+
+.goal-card-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.goal-card-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.goal-amounts {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.goal-current {
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: -0.8px;
+  font-family: var(--font-mono);
+}
+
+.goal-target {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.goal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.goal-pct {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 400;
+  font-family: var(--font-mono);
+}
+
+/* Sugestão */
+.sugestao-card {
+  margin: 20px 20px 0;
+  padding: var(--space-4);
+  background: rgba(78,207,160,0.05);
+  border: 1px solid var(--brand-primary-border);
+  border-radius: var(--radius-xl);
+  animation: fadeInUp 0.35s ease;
+}
+.sugestao-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.sugestao-icon { font-size: 20px; }
+.sugestao-title {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--brand-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.sugestao-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.sugestao-amount {
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--brand-primary);
+  letter-spacing: -0.8px;
+  font-family: var(--font-mono);
+  margin-bottom: 6px;
+}
+.sugestao-info {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Sheet */
+.sheet-title {
+  font-size: var(--font-size-lg);
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.sheet-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* Add Goal Form */
+.add-goal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+/* Icon Picker */
+.icon-picker {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.icon-btn {
+  aspect-ratio: 1;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition-fast);
+}
+.icon-btn:hover { border-color: var(--border-default); }
+.icon-btn-selected {
+  border-color: var(--brand-primary) !important;
+  background: var(--brand-primary-dim);
+}
+
+/* Premium Gate */
+.premium-gate {
+  margin: 0 20px 12px;
+  background: rgba(78,207,160,0.04);
+  border: 1px solid var(--brand-primary-border);
+  border-radius: var(--radius-xl);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.premium-gate:hover { background: rgba(78,207,160,0.08); }
+.gate-inner { display: flex; align-items: center; gap: 12px; }
+.gate-icon { font-size: 20px; }
+.gate-title { font-size: var(--font-size-sm); font-weight: 500; color: var(--brand-primary); }
+.gate-desc { font-size: var(--font-size-xs); color: var(--text-secondary); margin-top: 2px; }
+.gate-arrow { font-size: 18px; color: var(--brand-primary); margin-left: auto; }
