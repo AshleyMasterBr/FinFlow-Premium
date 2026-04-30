@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context';
+import { supabase } from '../supabase';
 import { formatCurrency, getMonthlyHistory } from '../store';
 import BottomNav from '../components/BottomNav';
 import './Perfil.css';
@@ -40,6 +41,34 @@ export default function Perfil() {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editName, setEditName] = useState(userMeta.full_name || '');
   const [editAvatar, setEditAvatar] = useState(userMeta.avatar_url || '');
+  const [uploading, setUploading] = useState(false);
+
+  const handleAvatarUpload = async (e) => {
+    try {
+      if (!e.target.files || e.target.files.length === 0) return;
+      setUploading(true);
+      const file = e.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${data.session.user.id}/${Math.random()}.${fileExt}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(fileName);
+
+      setEditAvatar(publicUrl);
+    } catch (error) {
+      console.error('Error uploading avatar:', error);
+      alert('Erro ao fazer upload da imagem. O bucket foi criado no Supabase?');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSaveProfile = async () => {
     await updateUserMetadata({ full_name: editName, avatar_url: editAvatar });
@@ -202,16 +231,32 @@ export default function Perfil() {
               </div>
               
               <div className="input-group">
-                <label className="input-label">URL da Foto (opcional)</label>
-                <input
-                  className="input-field"
-                  placeholder="https://..."
-                  value={editAvatar}
-                  onChange={e => setEditAvatar(e.target.value)}
-                />
+                <label className="input-label">Foto de Perfil</label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  {editAvatar ? (
+                    <img src={editAvatar} alt="Preview" style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} />
+                  ) : (
+                    <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--brand-primary-dim)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)', fontWeight: 500 }}>
+                      {editName ? editName.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    disabled={uploading}
+                    style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-muted)' }}
+                  />
+                </div>
+                {uploading && <span style={{ fontSize: 12, color: 'var(--brand-primary)' }}>Enviando imagem...</span>}
               </div>
 
-              <button className="btn btn-primary btn-full" onClick={handleSaveProfile} style={{ marginTop: 10 }}>
+              <button 
+                className={`btn btn-primary btn-full ${uploading ? 'btn-disabled' : ''}`} 
+                onClick={handleSaveProfile} 
+                disabled={uploading}
+                style={{ marginTop: 10 }}
+              >
                 Salvar alterações
               </button>
             </div>
